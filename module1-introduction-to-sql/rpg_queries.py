@@ -7,6 +7,8 @@ connection = sqlite3.connect(DB_FILEPATH)
 
 cursor = connection.cursor()
 
+##test queries
+#Add all query results to dictionary
 query = """SELECT 
 	count(distinct charactercreator_character.character_id) as total_characters, 
 	count(distinct charactercreator_mage.character_ptr_id) as class_mage, 
@@ -68,8 +70,8 @@ result = cursor.execute(query).fetchall()
 
 queries.update({"--------------------\nAverage total items ": result[0][0], "Average total weapons: ": result[0][1]})
 
-for key, value in queries.items():
-    print(key, value)
+for key, value in queries.items(): #print query results, with key being the description text, and value being the result
+    print(key, value) #For this query we print values side by side, so description text is split between the key and value
     if key == "--------------------\n":
-        for row in character_items:
+        for row in character_items: #The actual values we must pull out of the list(not our created dictionary)
             print(row)
